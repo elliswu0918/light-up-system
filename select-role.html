@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>選擇身份 - 智慧信仰鏈</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)), url('images/96501f21707f0984f16b69aaf4f7dcfd.jpg');
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .role-container {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .role-header {
+            margin-bottom: 3rem;
+        }
+
+        .role-header h1 {
+            color: #FFD700;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px rgba(255,215,0,0.3);
+        }
+
+        .role-header p {
+            color: #ccc;
+            font-size: 1.1rem;
+        }
+
+        .role-options {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .role-card {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            width: 280px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .role-card:hover {
+            transform: translateY(-10px);
+            border-color: #FFD700;
+            box-shadow: 0 0 30px rgba(255,215,0,0.2);
+        }
+
+        .role-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(255,215,0,0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .role-card:hover::before {
+            opacity: 1;
+        }
+
+        .role-icon {
+            font-size: 3rem;
+            color: #FFD700;
+            margin-bottom: 1.5rem;
+        }
+
+        .role-title {
+            color: #FFD700;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .role-description {
+            color: #ccc;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .role-btn {
+            background: rgba(255,215,0,0.2);
+            color: #FFD700;
+            border: 1px solid #FFD700;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .role-btn:hover {
+            background: #FFD700;
+            color: #000;
+        }
+
+        .back-link {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            color: #FFD700;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-link:hover {
+            color: #f0c800;
+        }
+    </style>
+</head>
+<body>
+    <a href="login.html" class="back-link">← 返回登入</a>
+
+    <div class="role-container">
+        <div class="role-header">
+            <h1>選擇您的身份</h1>
+            <p>請選擇您要以什麼身份進入系統</p>
+        </div>
+
+        <div class="role-options">
+            <div class="role-card" onclick="window.location.href='temple-dashboard.html'">
+                <div class="role-icon">🏮</div>
+                <h2 class="role-title">廟方管理者</h2>
+                <p class="role-description">管理廟宇事務、查看信眾祈福紀錄、處理各項請求</p>
+                <button class="role-btn">進入廟方系統</button>
+            </div>
+
+            <div class="role-card" onclick="window.location.href='devotee-dashboard.html'">
+                <div class="role-icon">🙏</div>
+                <h2 class="role-title">信眾</h2>
+                <p class="role-description">線上點燈、祈福、查看祈福紀錄、接收廟方通知</p>
+                <button class="role-btn">進入信眾系統</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

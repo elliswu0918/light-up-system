@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>廟方管理系統 - 智慧信仰鏈</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)), url('images/96501f21707f0984f16b69aaf4f7dcfd.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 2rem;
+            border-right: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .logo {
+            color: #FFD700;
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .nav-menu {
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-bottom: 1rem;
+        }
+
+        .nav-link {
+            color: #ccc;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 0.8rem;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 215, 0, 0.1);
+            color: #FFD700;
+        }
+
+        .nav-link.active {
+            background: rgba(255, 215, 0, 0.2);
+            color: #FFD700;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+        }
+
+        .dashboard-header {
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-header h1 {
+            color: #FFD700;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 10px;
+            padding: 1.5rem;
+        }
+
+        .stat-card h3 {
+            color: #FFD700;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-description {
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        .lantern-map {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .lantern-map h2 {
+            color: #FFD700;
+            margin-bottom: 1rem;
+        }
+
+        .map-container {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 5px;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .blockchain-records {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 10px;
+            padding: 1.5rem;
+        }
+
+        .blockchain-records h2 {
+            color: #FFD700;
+            margin-bottom: 1rem;
+        }
+
+        .records-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .records-table th,
+        .records-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+        }
+
+        .records-table th {
+            color: #FFD700;
+            font-weight: 500;
+        }
+
+        .records-table td {
+            color: #ccc;
+        }
+
+        .blockchain-hash {
+            color: #4CAF50;
+            font-family: monospace;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+            padding: 1rem;
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            background: #FFD700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="logo">智慧信仰鏈</div>
+            <nav>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link active">儀表板</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">燈位管理</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">信眾名單</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">區塊鏈記錄</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">系統設定</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="user-info">
+                <div class="user-avatar">廟</div>
+                <div>
+                    <div style="color: #FFD700;">廟方管理員</div>
+                    <div style="color: #ccc; font-size: 0.9rem;">temple123</div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="dashboard-header">
+                <h1>廟方管理系統</h1>
+                <p>即時掌握點燈資訊與信眾動態</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>🔢 燈位剩餘數量</h3>
+                    <div class="stat-number">328</div>
+                    <p class="stat-description">可用燈位 / 總燈位：328/500</p>
+                </div>
+                <div class="stat-card">
+                    <h3>📋 本日登記數</h3>
+                    <div class="stat-number">42</div>
+                    <p class="stat-description">較前日 +12 件登記</p>
+                </div>
+                <div class="stat-card">
+                    <h3>💫 區塊鏈記錄數</h3>
+                    <div class="stat-number">1,286</div>
+                    <p class="stat-description">本月新增 286 筆記錄</p>
+                </div>
+            </div>
+
+            <div class="lantern-map">
+                <h2>🗺️ 燈位分布圖</h2>
+                <div class="map-container">
+                    <div style="color: #ccc;">
+                        互動式燈位分布圖
+                        <br>
+                        （點擊燈位可查看詳細資訊）
+                    </div>
+                </div>
+            </div>
+
+            <div class="blockchain-records">
+                <h2>最新區塊鏈記錄</h2>
+                <table class="records-table">
+                    <thead>
+                        <tr>
+                            <th>時間</th>
+                            <th>信眾</th>
+                            <th>燈位編號</th>
+                            <th>區塊雜湊值</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2024-03-21 14:30</td>
+                            <td>王小明</td>
+                            <td>A-123</td>
+                            <td class="blockchain-hash">0x7f2c8d...</td>
+                        </tr>
+                        <tr>
+                            <td>2024-03-21 14:25</td>
+                            <td>李小華</td>
+                            <td>B-456</td>
+                            <td class="blockchain-hash">0x3a9b1e...</td>
+                        </tr>
+                        <tr>
+                            <td>2024-03-21 14:20</td>
+                            <td>張小美</td>
+                            <td>C-789</td>
+                            <td class="blockchain-hash">0x5d4e2f...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+</body>
+</html> 

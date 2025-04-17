@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>信眾介面 - 智慧信仰鏈</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)), url('images/96501f21707f0984f16b69aaf4f7dcfd.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 2rem;
+            border-right: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .logo {
+            color: #FFD700;
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .nav-menu {
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-bottom: 1rem;
+        }
+
+        .nav-link {
+            color: #ccc;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 0.8rem;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 215, 0, 0.1);
+            color: #FFD700;
+        }
+
+        .nav-link.active {
+            background: rgba(255, 215, 0, 0.2);
+            color: #FFD700;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .welcome-section {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .welcome-section h1 {
+            color: #FFD700;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .user-profile {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            background: #FFD700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        .profile-info h2 {
+            color: #FFD700;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .profile-item {
+            background: rgba(255, 215, 0, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+        }
+
+        .profile-item label {
+            color: #FFD700;
+            font-size: 0.9rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-item p {
+            color: #fff;
+        }
+
+        .lantern-recommendations {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .recommendation-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .recommendation-card {
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .recommendation-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 215, 0, 0.2);
+        }
+
+        .lantern-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .lantern-records {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .records-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+        }
+
+        .records-table th,
+        .records-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+        }
+
+        .records-table th {
+            color: #FFD700;
+            font-weight: 500;
+        }
+
+        .records-table td {
+            color: #ccc;
+        }
+
+        .status-active {
+            color: #4CAF50;
+        }
+
+        .status-pending {
+            color: #FFC107;
+        }
+
+        .status-completed {
+            color: #ccc;
+        }
+
+        .blockchain-info {
+            font-family: monospace;
+            color: #4CAF50;
+        }
+
+        .section-title {
+            color: #FFD700;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .edit-btn {
+            background: rgba(255, 215, 0, 0.2);
+            color: #FFD700;
+            border: 1px solid #FFD700;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .edit-btn:hover {
+            background: #FFD700;
+            color: #000;
+        }
+
+        .temple-selection {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .temple-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .temple-card {
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 10px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .temple-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 215, 0, 0.2);
+        }
+
+        .temple-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            background: #FFD700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        .temple-info {
+            flex: 1;
+        }
+
+        .temple-info h3 {
+            color: #FFD700;
+            margin-bottom: 0.5rem;
+        }
+
+        .temple-info p {
+            color: #ccc;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .temple-stats {
+            display: flex;
+            gap: 1rem;
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+        }
+
+        .temple-stat {
+            color: #FFD700;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="logo">智慧信仰鏈</div>
+            <nav>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link active">主頁</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">公廟列表</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">點燈服務</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">我的燈位</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">繳費記錄</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">個人設定</a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="welcome-section">
+                <h1>歡迎回來，王大明</h1>
+                <p>願您心想事成，福慧雙修</p>
+            </div>
+
+            <div class="temple-selection">
+                <h2 class="section-title">🏮 推薦公廟</h2>
+                <p>為您精選附近的熱門公廟</p>
+                <div class="temple-grid">
+                    <div class="temple-card">
+                        <div class="temple-image">🏯</div>
+                        <div class="temple-info">
+                            <h3>松山慈祐宮</h3>
+                            <p>臺北市松山區八德路四段761號</p>
+                            <div class="temple-stats">
+                                <span class="temple-stat">⭐ 4.9</span>
+                                <span class="temple-stat">🏮 燈位充足</span>
+                                <span class="temple-stat">👥 2.5k 信眾</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="temple-card">
+                        <div class="temple-image">⛩️</div>
+                        <div class="temple-info">
+                            <h3>龍山寺</h3>
+                            <p>臺北市萬華區廣州街211號</p>
+                            <div class="temple-stats">
+                                <span class="temple-stat">⭐ 4.8</span>
+                                <span class="temple-stat">🏮 尚有燈位</span>
+                                <span class="temple-stat">👥 3.2k 信眾</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="temple-card">
+                        <div class="temple-image">🏮</div>
+                        <div class="temple-info">
+                            <h3>行天宮</h3>
+                            <p>臺北市中山區民權東路二段109號</p>
+                            <div class="temple-stats">
+                                <span class="temple-stat">⭐ 4.9</span>
+                                <span class="temple-stat">🏮 熱門</span>
+                                <span class="temple-stat">👥 5k+ 信眾</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="user-profile">
+                <div class="profile-header">
+                    <div class="profile-avatar">👤</div>
+                    <div class="profile-info">
+                        <h2>個人資料</h2>
+                        <p>上次更新：2024-03-21</p>
+                    </div>
+                    <button class="edit-btn">編輯資料</button>
+                </div>
+
+                <div class="profile-grid">
+                    <div class="profile-item">
+                        <label>姓名</label>
+                        <p>王大明</p>
+                    </div>
+                    <div class="profile-item">
+                        <label>生肖</label>
+                        <p>龍</p>
+                    </div>
+                    <div class="profile-item">
+                        <label>生辰八字</label>
+                        <p>甲子 乙丑 丙寅 丁卯</p>
+                    </div>
+                    <div class="profile-item">
+                        <label>出生年月日</label>
+                        <p>1988年2月15日</p>
+                    </div>
+                    <div class="profile-item">
+                        <label>聯絡電話</label>
+                        <p>0912-345-678</p>
+                    </div>
+                    <div class="profile-item">
+                        <label>電子信箱</label>
+                        <p>wang@example.com</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lantern-recommendations">
+                <h2 class="section-title">🤖 智能推薦燈種</h2>
+                <p>根據您的生辰八字，為您推薦以下燈種：</p>
+                <div class="recommendation-cards">
+                    <div class="recommendation-card">
+                        <div class="lantern-icon">🏮</div>
+                        <h3>文昌燈</h3>
+                        <p>助您學業進步、事業順遂</p>
+                    </div>
+                    <div class="recommendation-card">
+                        <div class="lantern-icon">✨</div>
+                        <h3>太歲燈</h3>
+                        <p>化解太歲、平安順遂</p>
+                    </div>
+                    <div class="recommendation-card">
+                        <div class="lantern-icon">💫</div>
+                        <h3>光明燈</h3>
+                        <p>祈求平安、智慧圓滿</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lantern-records">
+                <h2 class="section-title">🏮 點燈記錄</h2>
+                <table class="records-table">
+                    <thead>
+                        <tr>
+                            <th>燈種</th>
+                            <th>點燈日期</th>
+                            <th>狀態</th>
+                            <th>金額</th>
+                            <th>區塊鏈記錄</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>文昌燈</td>
+                            <td>2024-03-21</td>
+                            <td class="status-active">點燈中</td>
+                            <td>NT$ 1,000</td>
+                            <td class="blockchain-info">0x7f2c8d...</td>
+                        </tr>
+                        <tr>
+                            <td>太歲燈</td>
+                            <td>2024-02-15</td>
+                            <td class="status-active">點燈中</td>
+                            <td>NT$ 1,200</td>
+                            <td class="blockchain-info">0x3a9b1e...</td>
+                        </tr>
+                        <tr>
+                            <td>光明燈</td>
+                            <td>2023-12-31</td>
+                            <td class="status-completed">已完成</td>
+                            <td>NT$ 800</td>
+                            <td class="blockchain-info">0x5d4e2f...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+</body>
+</html> 
